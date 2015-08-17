@@ -1,6 +1,6 @@
 {
   "name": "koa-foursquare",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple module to access foursquares venue API for Koa",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,12 @@
     "venues",
     "koa"
   ],
+  "repository": {
+    "url": "git://github.com/link0047/koa-foursquare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/link0047/koa-foursquare/issues"
+  },
   "author": "Jamaal Williams",
   "license": "MIT",
   "dependencies": {
