@@ -1,6 +1,6 @@
 {
   "name": "koa-foursquare",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Simple module to access foursquares venue API for Koa",
   "main": "index.js",
   "scripts": {
