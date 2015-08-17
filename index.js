@@ -12,7 +12,7 @@ module.exports = function (client_id, client_secret) {
   });
 
   return {
-    getCategories: function *(params) {
+    getCategories: function *() {
       var url = baseUrl + 'categories?' + credentials;
       var res = yield request(url);
       return JSON.parse(res.body);
