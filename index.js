@@ -1,35 +1,52 @@
 'use strict';
 
-var request     = require('koa-request');
-var querystring = require('querystring');
+let request = require('koa-request');
+let qs      = require('qs');
 
 module.exports = function (client_id, client_secret) {
-  var baseUrl = 'https://api.foursquare.com/v2/venues/';
-  var credentials = querystring.stringify({
+  let baseUrl = 'https://api.foursquare.com/v2/venues/';
+  let credentials = qs.stringify({
     v: '20140806',
     client_id: client_id,
     client_secret: client_secret
   });
 
+  /**
+   * buildQS - Build a query string from JSON object
+   *
+   * @param  {object} params  json object of params to pass to a twitter endpoint.
+   * @return {string}         return a stringified version of those params.
+   */
+  function buildQS (params) {
+    if (params && Object.keys(params).length > 0) {
+      return (qs.stringify(params) + '&');
+    }
+    return '';
+  }
+
   return {
     getCategories: function *() {
-      var url = baseUrl + 'categories?' + credentials;
-      var res = yield request(url);
+      let url = baseUrl + 'categories?' + credentials;
+      let res = yield request(url);
       return JSON.parse(res.body);
     },
     getVenues: function *(params) {
-      var url = baseUrl + 'search?' + querystring.stringify(params) + '&' + credentials;
-      var res = yield request(url);
+      let url = baseUrl + 'search?' + buildQS(params) + credentials;
+      let res = yield request(url);
       return JSON.parse(res.body);
     },
     exploreVenues: function *(params) {
-      var url = baseUrl + 'explore?' + querystring.stringify(params) + '&' + credentials;
-      var res = yield request(url);
+      let url = baseUrl + 'explore?' + buildQS(params) + credentials;
+      let res = yield request(url);
       return JSON.parse(res.body);
     },
     getVenue: function *(params) {
-      var url = baseUrl + params.venue_id + '&' + credentials;
-      var res = yield request(url);
+      if (params.venue_id == undefined || params.id == undefined)
+        console.error('venue_id or id must be specified');
+
+      let id = (params.venue_id) ? params.venue_id : params.id;
+      let url = baseUrl + ((id) ? id : '') + '?' + credentials;
+      let res = yield request(url);
       return JSON.parse(res.body);
     }
   }

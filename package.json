@@ -1,9 +1,10 @@
 {
   "name": "koa-foursquare",
-  "version": "1.0.3",
+  "version": "1.1.3",
   "description": "Simple module to access foursquares venue API for Koa",
   "main": "index.js",
   "scripts": {
+    "start": "node --harmony example.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,6 +22,6 @@
   "license": "MIT",
   "dependencies": {
     "koa-request": "^1.0.0",
-    "querystring": "^0.2.0"
+    "qs": "^4.0.0"
   }
 }
